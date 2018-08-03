@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"tsc -w\" \"nodemon --inspect -w dist/server dist/server\"",
-    "start": "next start -p $PORT",
+    "start": "node dist/server",
     "heroku-postbuild": "next build dist"
   },
   "author": "",
