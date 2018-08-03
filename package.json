@@ -13,7 +13,7 @@
     "dev": "concurrently \"tsc -w\" \"nodemon --inspect -w dist/server dist/server\"",
     "build": "next build",
     "heroku-postbuild": "next build dist",
-    "start": "node dist/server.js -p $PORT"
+    "start": "node dist/server.js"
   },
   "author": "",
   "license": "ISC",
