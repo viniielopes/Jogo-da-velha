@@ -11,7 +11,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"tsc -w\" \"nodemon --inspect -w dist/server dist/server\"",
-    "build": "next build",
+    "build": "next build dist",
     "heroku-postbuild": "next build dist",
     "start": "node dist/server.js -p $PORT"
   },
