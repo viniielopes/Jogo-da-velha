@@ -7,7 +7,7 @@ const app = express();
 const httpServer = http.createServer(app);
 const io = sockIO(httpServer);
 
-const porta = process.env.port || 3000;
+const porta = process.env.PORT || 3000;
 // const porta = process.env.PORT || 3000;
 const dev = process.env.NODE_ENV !== "production";
 
