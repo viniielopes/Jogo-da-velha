@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "jsx": "react",
+    "jsxFactory": "React.createElement",
+    "noEmitOnError": true,
+    "outDir": "./dist",
+    // "sourceMap": true,
+    // "mapRoot": "./dist",
+    "inlineSources": true,
+    "inlineSourceMap": true
+  },
+
+  "include": ["./server/**/*.ts", "./server/**/*.tsx", "./server/*/*"],
+  "exclude": ["node_modules"]
+}

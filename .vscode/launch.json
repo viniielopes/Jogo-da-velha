@@ -1,0 +1,39 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Next: Chrome",
+      "url": "http://localhost:3000",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack:///../../server/pages/*.tsx":
+          "${workspaceFolder}/server/pages/*.tsx",
+        "webpack:///src/*": "${webRoot}/*",
+        "webpack:///*": "*",
+        "webpack:///./~/*": "${webRoot}/node_modules/*",
+        "meteor://💻app/*": "${webRoot}/*"
+      },
+      "skipFiles": [
+        "<node_internals>/**/*.js",
+        "${workspaceRoot}/node_modules/**/*.js",
+        "${workspaceRoot}/node_modules"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Next: Node",
+      "console": "integratedTerminal",
+      "preLaunchTask": "npm: debug",
+      "skipFiles": ["node_modules/**/*.js"]
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Next: Full",
+      "configurations": ["Next: Node", "Next: Chrome"]
+    }
+  ]
+}
