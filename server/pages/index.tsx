@@ -1,3 +1,4 @@
+import Link from "next/link";
 import * as React from "react";
 import * as socketIO from "socket.io-client";
 import Header from "../components/Header";
@@ -27,7 +28,9 @@ export default class Index extends React.PureComponent<{}, IAppState> {
   }
 
   public componentDidMount() {
-    this.io = socketIO.connect(`${document.location.protocol}//${document.location.host}`);
+    this.io = socketIO.connect(
+      `${document.location.protocol}//${document.location.host}`
+    );
 
     this.io.on("recebeMSG", (msg) => {
       let msgs: string[] = [];
@@ -39,30 +42,36 @@ export default class Index extends React.PureComponent<{}, IAppState> {
   public render() {
     const listaMSGS = this.exibiMensagens();
     return (
-      <div>
+      <html>
         <Header />
-        <div className="jumbotron mt-0">
-          <div>
-            <h2 className="">Mensagens Anonimas:</h2>
-            {listaMSGS}
+        <body style={bodyTelaToda}>
+          <div className="ml-3">
+            <div>
+              <h2>Mensagens Anonimas:</h2>
+              {listaMSGS}
+            </div>
           </div>
-        </div>
-        <div className="container">
-          <div className="row">
-            <input
-              type="text"
-              name="mensagem"
-              id="mensagem"
-              ref={this.campoMensagem}
-              className="form-control col-10"
-            />
-            <button onClick={this.enviarMSG} className="btn btn-danger col-2">
-              Enviar
-            </button>
+          <div style={fixBottom} className="container">
+            <div className="row">
+              <input
+                type="text"
+                name="mensagem"
+                id="mensagem"
+                ref={this.campoMensagem}
+                className="form-control col-10"
+              />
+
+              <Link prefetch={true} href="/mensagens">
+                <a>Home</a>
+              </Link>
+              <button onClick={this.enviarMSG} className="btn btn-danger col-2">
+                Enviar
+              </button>
+            </div>
           </div>
-        </div>
-        <Scripts />
-      </div>
+          <Scripts />
+        </body>
+      </html>
     );
   }
 
@@ -79,3 +88,15 @@ export default class Index extends React.PureComponent<{}, IAppState> {
     this.io.emit("enviaMSG", mensagem.value);
   }
 }
+
+const (fixBottom:React.CSSProperties) = {
+  bottom: 0,
+  left: 0,
+  right: 0,
+  position: "fixed",
+  zIndex: 1030,
+};
+
+const bodyTelaToda = {
+  height: "-webkit-fill-available",
+};

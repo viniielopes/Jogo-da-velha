@@ -4,7 +4,9 @@
   "jsRules": {},
   "rules": {
     "jsx-wrap-multiline": false,
-    "semicolon": false
+    "semicolon": false,
+    "trailing-comma": false,
+    "object-literal-sort-keys": false
   },
   "rulesDirectory": []
 }
