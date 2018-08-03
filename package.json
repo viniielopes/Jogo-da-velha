@@ -10,8 +10,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"tsc -w\" \"nodemon --inspect -w dist/server dist/server\"",
-    "start": "next start -p $PORT",
-    "heroku-postbuild": "next build dist"
+    "build": "next build",
+    "heroku-postbuild": "next build dist",
+    "start": "node dist/server.js -p $PORT"
   },
   "author": "",
   "license": "ISC",
