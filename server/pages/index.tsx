@@ -27,7 +27,7 @@ export default class Index extends React.PureComponent<{}, IAppState> {
   }
 
   public componentDidMount() {
-    this.io = socketIO.connect("http://localhost:3000/");
+    this.io = socketIO.connect(`${document.location.protocol}//${document.location.host}`);
 
     this.io.on("recebeMSG", (msg) => {
       let msgs: string[] = [];
