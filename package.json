@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "engines": {
     "vscode": "^1.22.0",
-    "npm": "^5.7.1"
+    "npm": "^5.7.1",
+    "node": "^6.11.x"
   },
   "description": "",
   "main": "dist/pages/index.js",
