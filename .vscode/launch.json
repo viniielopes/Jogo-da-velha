@@ -18,16 +18,9 @@
       "skipFiles": [
         "<node_internals>/**/*.js",
         "${workspaceRoot}/node_modules/**/*.js",
-        "${workspaceRoot}/node_modules"
+        "${workspaceRoot}/node_modules",
+        "node_modules"
       ]
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Next: Node",
-      "console": "integratedTerminal",
-      "preLaunchTask": "npm: debug",
-      "skipFiles": ["node_modules/**/*.js"]
     }
   ],
   "compounds": [

@@ -22,9 +22,6 @@ export default class Index extends React.PureComponent<{}, IAppState> {
       mensagem: "",
       mensagens: [],
     };
-    this.exibiMensagens = this.exibiMensagens.bind(this);
-
-    this.enviarMSG = this.enviarMSG.bind(this);
   }
 
   public componentDidMount() {
@@ -39,64 +36,87 @@ export default class Index extends React.PureComponent<{}, IAppState> {
     });
   }
 
+  public componentDidUpdate() {
+    if (this.state.mensagens.length > 0) {
+      this.ScrollMensagens();
+    }
+  }
+
   public render() {
     const listaMSGS = this.exibiMensagens();
     return (
-      <html>
+      <body style={bodyTelaToda}>
         <Header />
-        <body style={bodyTelaToda}>
-          <div className="ml-3">
-            <div>
-              <h2>Mensagens Anonimas:</h2>
-              {listaMSGS}
-            </div>
+        <div className="container">
+          <div className="ml-3 row">
+            <h2 className="col-12">Mensagens :</h2>
           </div>
-          <div style={fixBottom} className="container">
-            <div className="row">
-              <input
-                type="text"
-                name="mensagem"
-                id="mensagem"
-                ref={this.campoMensagem}
-                className="form-control col-10"
-              />
 
-              <Link prefetch={true} href="/mensagens">
-                <a>Home</a>
-              </Link>
-              <button onClick={this.enviarMSG} className="btn btn-danger col-2">
-                Enviar
-              </button>
+          <div className="row">
+            <div className="card col-12 bg-info" style={AreaMensagem}>
+              <div className="card-body" id="txtAreaMensagem">
+                {""}
+                {listaMSGS}
+              </div>
             </div>
           </div>
-          <Scripts />
-        </body>
-      </html>
+        </div>
+        <div className="container" style={fixBottom}>
+          <div className="row">
+            <input
+              type="text"
+              name="mensagem"
+              id="mensagem"
+              ref={this.campoMensagem}
+              className="form-control col-10"
+            />
+
+            <button onClick={this.enviarMSG} className="btn btn-danger col-2">
+              Enviar
+            </button>
+          </div>
+        </div>
+        <Scripts />
+      </body>
     );
   }
 
   private exibiMensagens = (): JSX.Element[] | void => {
     if (this.state.mensagens.length > 0) {
       return this.state.mensagens.map((mensagem) => (
-        <li key={Math.random()}>{mensagem}</li>
+        <li key={Math.random()} className="col-12">
+          {mensagem}
+        </li>
       ));
     }
   };
 
-  private enviarMSG() {
+  private enviarMSG = () => {
     const mensagem = this.campoMensagem.current as HTMLInputElement;
     this.io.emit("enviaMSG", mensagem.value);
-  }
+  };
+
+  private ScrollMensagens = () => {
+    const ultimamensagem = document.querySelector("li:last-child");
+    ultimamensagem.scrollIntoView();
+  };
 }
 
-const (fixBottom:React.CSSProperties) = {
-  bottom: 0,
-  left: 0,
-  right: 0,
+const fixBottom: React.CSSProperties = {
+  bottom: "0",
+  left: "0",
+  right: "0",
   position: "fixed",
   zIndex: 1030,
+  marginBottom: "1rem",
 };
 
-const bodyTelaToda = {
+const bodyTelaToda: React.CSSProperties = {
   height: "-webkit-fill-available",
+};
+
+const AreaMensagem: React.CSSProperties = {
+  paddingBottom: "1rem",
+  overflowY: "auto",
+  height: "33rem",
 };
