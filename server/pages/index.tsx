@@ -49,11 +49,19 @@ export default class Index extends React.PureComponent<{}, IAppState> {
         <Header />
         <div className="container">
           <div className="ml-3 row">
-            <h2 className="col-12">Mensagens :</h2>
+            <h2
+              className="col-12 text-center text-uppercase"
+              style={{ color: "cornsilk" }}
+            >
+              Mensagens :
+            </h2>
           </div>
 
           <div className="row">
-            <div className="card col-12 bg-info" style={AreaMensagem}>
+            <div
+              className="card col-6 offset-3 rounded"
+              style={AreaMensagem}
+            >
               <div className="card-body" id="txtAreaMensagem">
                 {""}
                 {listaMSGS}
@@ -61,14 +69,14 @@ export default class Index extends React.PureComponent<{}, IAppState> {
             </div>
           </div>
         </div>
-        <div className="container" style={fixBottom}>
-          <div className="row">
+        <div className="container mt-3">
+          <div className="row offset-4">
             <input
               type="text"
               name="mensagem"
               id="mensagem"
               ref={this.campoMensagem}
-              className="form-control col-10"
+              className="form-control col-5"
             />
 
             <button onClick={this.enviarMSG} className="btn btn-danger col-2">
@@ -84,9 +92,9 @@ export default class Index extends React.PureComponent<{}, IAppState> {
   private exibiMensagens = (): JSX.Element[] | void => {
     if (this.state.mensagens.length > 0) {
       return this.state.mensagens.map((mensagem) => (
-        <li key={Math.random()} className="col-12">
+        <p key={Math.random()} className="col-12">
           {mensagem}
-        </li>
+        </p>
       ));
     }
   };
@@ -94,29 +102,34 @@ export default class Index extends React.PureComponent<{}, IAppState> {
   private enviarMSG = () => {
     const mensagem = this.campoMensagem.current as HTMLInputElement;
     this.io.emit("enviaMSG", mensagem.value);
+    this.campoMensagem.current.value = "";
   };
 
   private ScrollMensagens = () => {
-    const ultimamensagem = document.querySelector("li:last-child");
+    const ultimamensagem = document.querySelector("p:last-child");
     ultimamensagem.scrollIntoView();
   };
 }
 
-const fixBottom: React.CSSProperties = {
-  bottom: "0",
-  left: "0",
-  right: "0",
-  position: "fixed",
-  zIndex: 1030,
-  marginBottom: "1rem",
-};
+// const fixBottom: React.CSSProperties = {
+//   bottom: "0",
+//   left: "0",
+//   right: "0",
+//   position: "fixed",
+//   zIndex: 1030,
+//   marginBottom: "1rem",
+// };
 
 const bodyTelaToda: React.CSSProperties = {
   height: "-webkit-fill-available",
+  backgroundImage:
+    "url(https://static.todamateria.com.br/upload/gr/af/grafite-arte-urbana-og.jpg)",
 };
 
 const AreaMensagem: React.CSSProperties = {
   paddingBottom: "1rem",
   overflowY: "auto",
-  height: "33rem",
+  overflowX: "hidden",
+  height: "20rem",
+  backgroundColor: "cornsilk",
 };
