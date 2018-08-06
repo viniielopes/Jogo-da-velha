@@ -6,7 +6,8 @@
     "jsx-wrap-multiline": false,
     "semicolon": false,
     "trailing-comma": false,
-    "object-literal-sort-keys": false
+    "object-literal-sort-keys": false,
+    "jsx-alignment": false
   },
   "rulesDirectory": []
 }
