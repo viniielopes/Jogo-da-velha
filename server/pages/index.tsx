@@ -51,17 +51,15 @@ export default class Index extends React.PureComponent<{}, IAppState> {
           <div className="ml-3 row">
             <h2
               className="col-12 text-center text-uppercase"
-              style={{ color: "cornsilk" }}
-            >
+              style={{ color: "cornsilk" }}>
               Mensagens :
             </h2>
           </div>
 
           <div className="row">
             <div
-              className="card col-6 offset-3 rounded"
-              style={AreaMensagem}
-            >
+              className="card col-12 col-lg-6 offset-lg-3 rounded"
+              style={AreaMensagem}>
               <div className="card-body" id="txtAreaMensagem">
                 {""}
                 {listaMSGS}
@@ -70,16 +68,18 @@ export default class Index extends React.PureComponent<{}, IAppState> {
           </div>
         </div>
         <div className="container mt-3">
-          <div className="row offset-4">
+          <div className="row offset-lg-4 mx-1">
             <input
               type="text"
               name="mensagem"
               id="mensagem"
               ref={this.campoMensagem}
-              className="form-control col-5"
+              className="form-control col-8 col-lg-5 offset-3"
             />
 
-            <button onClick={this.enviarMSG} className="btn btn-danger col-2">
+            <button
+              onClick={this.enviarMSG}
+              className="btn btn-danger col-lg-1 col-4">
               Enviar
             </button>
           </div>
@@ -101,8 +101,10 @@ export default class Index extends React.PureComponent<{}, IAppState> {
 
   private enviarMSG = () => {
     const mensagem = this.campoMensagem.current as HTMLInputElement;
-    this.io.emit("enviaMSG", mensagem.value);
-    this.campoMensagem.current.value = "";
+    if (mensagem.value.length > 0) {
+      this.io.emit("enviaMSG", mensagem.value);
+      this.campoMensagem.current.value = "";
+    }
   };
 
   private ScrollMensagens = () => {
@@ -110,15 +112,6 @@ export default class Index extends React.PureComponent<{}, IAppState> {
     ultimamensagem.scrollIntoView();
   };
 }
-
-// const fixBottom: React.CSSProperties = {
-//   bottom: "0",
-//   left: "0",
-//   right: "0",
-//   position: "fixed",
-//   zIndex: 1030,
-//   marginBottom: "1rem",
-// };
 
 const bodyTelaToda: React.CSSProperties = {
   height: "-webkit-fill-available",
