@@ -115,8 +115,8 @@ export default class Index extends React.PureComponent<{}, IAppState> {
 
 const bodyTelaToda: React.CSSProperties = {
   height: "-webkit-fill-available",
-  backgroundImage:
-    "url(https://static.todamateria.com.br/upload/gr/af/grafite-arte-urbana-og.jpg)",
+  backgroundImage: "url(static/imgs/background.jpg)",
+  backgroundRepeat: "repeat",
 };
 
 const AreaMensagem: React.CSSProperties = {

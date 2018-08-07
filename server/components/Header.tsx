@@ -17,6 +17,15 @@ export default class Header extends React.Component {
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossOrigin="anonymous"
         />
+
+        <link
+          rel="shortcut icon"
+          href="static/imgs/Icone.png"
+          type="image/x-icon"
+        />
+        <link rel="icon" href="static/imgs/Icone.png" type="image/x-icon" />
+
+        <title>Jogo da velha do clan</title>
       </Head>
     );
   }
