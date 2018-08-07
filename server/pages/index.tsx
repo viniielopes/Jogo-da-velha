@@ -1,7 +1,6 @@
-import Link from "next/link";
+import Head from "next/document";
 import * as React from "react";
 import * as socketIO from "socket.io-client";
-import Header from "../components/Header";
 import Scripts from "../components/Scripts";
 
 interface IAppState {
@@ -46,7 +45,10 @@ export default class Index extends React.PureComponent<{}, IAppState> {
     const listaMSGS = this.exibiMensagens();
     return (
       <body style={bodyTelaToda}>
-        <Header />
+        <Head>
+          <title>Mensagens</title>
+        </Head>
+
         <div className="container">
           <div className="ml-3 row">
             <h2
