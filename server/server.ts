@@ -22,7 +22,7 @@ io.on("connect", (client) => {
   client.on("enviaMSG", (msg) => io.emit("recebeMSG", msg));
 
   client.on("fezJogada", (jogada, vezJogador) =>
-    io.emit("fezJogada", jogada, vezJogador)
+    client.broadcast.emit("fezJogada", jogada, vezJogador)
   );
 
   client.on("disconnect", () => {

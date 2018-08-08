@@ -2,6 +2,7 @@ import Head from "next/head";
 import * as React from "react";
 import * as socketIO from "socket.io-client";
 import styled from "styled-components";
+import { verificaVitoria } from "../Helpers/jogodavelha";
 
 export interface IJogoDaVelhaState {
   vezJogador: boolean;
@@ -38,8 +39,13 @@ export default class JogoDaVelha extends React.Component<
         <h1 style={{ textAlign: "center" }}>
           Vez do jogador {this.state.vezJogador ? "X" : "O"}
         </h1>
+
         <Wrapper>
-          <GridContainer>{botoes}</GridContainer>
+          <GridContainer>
+            {botoes}
+
+            <BtnReiniciar hidden={true}>Reiniciar</BtnReiniciar>
+          </GridContainer>
         </Wrapper>
       </React.Fragment>
     );
@@ -57,9 +63,15 @@ export default class JogoDaVelha extends React.Component<
 
   private campos = (): JSX.Element[] => {
     const botoes = this.state.jogadas.map((jogador, i) => (
-      // tslint:disable-next-line:jsx-no-lambda
-      <GridItem onClick={(e) => this.jogada(i, e)} key={i} id={`btn${i}`}>
-        {jogador} {/* // X ou O */}
+      <GridItem
+        // tslint:disable-next-line:jsx-no-lambda
+        onClick={(e) => this.jogada(i, e)}
+        key={i}
+        id={`btn${i}`}
+        disabled={jogador !== null ? true : false}>
+        {jogador}
+
+        {/* // X ou O */}
       </GridItem>
     ));
 
@@ -68,13 +80,15 @@ export default class JogoDaVelha extends React.Component<
 
   private jogada = (i: number, event: React.MouseEvent<HTMLButtonElement>) => {
     event.currentTarget.innerText = this.state.vezJogador ? "X" : "O";
-    const jogadas = this.state.jogadas.slice();
-    jogadas[i] = this.state.vezJogador ? "X" : "O";
+    const campoJogado = this.state.jogadas.slice();
+    campoJogado[i] = this.state.vezJogador ? "X" : "O";
 
-    this.setState({ vezJogador: !this.state.vezJogador });
+    verificaVitoria(campoJogado);
+
+    this.setState({ jogadas: campoJogado, vezJogador: !this.state.vezJogador });
     event.currentTarget.disabled = true;
 
-    this.io.emit("fezJogada", jogadas, this.state.vezJogador);
+    this.io.emit("fezJogada", campoJogado, !this.state.vezJogador);
   };
 }
 
@@ -94,7 +108,10 @@ const GridItem = styled.button`
   padding: 1.5rem;
   font-size: 1.5rem;
   text-align: center;
+  min-height: 5.5rem;
 `;
+
+const BtnReiniciar = styled.button``;
 
 const Wrapper = styled.div`
   display: flex;

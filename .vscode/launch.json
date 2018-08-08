@@ -5,8 +5,7 @@
       "type": "chrome",
       "request": "launch",
       "name": "debug chrome",
-      "url": "http://localhost:3000",
-      "sourceMaps": true,
+      "url": "http://localhost:3000/jogodavelha",
       "sourceMapPathOverrides": {
         "webpack:///../../server/pages/*.tsx":
           "${workspaceFolder}/server/pages/*.tsx",
@@ -27,7 +26,14 @@
       "request": "attach",
       "name": "Debug node/next",
       "port": 9229,
-      "restart": true
+      "restart": true,
+      "smartStep": true,
+      "skipFiles": [
+        "<node_internals>/**/*.js",
+        "${workspaceRoot}/node_modules/**/*.js",
+        "${workspaceRoot}/node_modules",
+        "node_modules"
+      ]
     }
   ],
   "compounds": [

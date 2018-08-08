@@ -6,11 +6,11 @@
     "jsxFactory": "React.createElement",
     "noEmitOnError": true,
     "outDir": "./dist",
-    // "sourceMap": true,
-    // "mapRoot": "./dist",
-    "inlineSources": true,
-    "inlineSourceMap": true,
-    
+    "sourceMap": true,
+    "mapRoot": "./dist",
+    "sourceRoot": "${workspaceFolder}/server"
+    // "inlineSources": true,
+    // "inlineSourceMap": true,
   },
 
   "include": ["./server/**/*.ts", "./server/**/*.tsx"],
