@@ -1,4 +1,4 @@
-import Head from "next/document";
+import Head from "next/head";
 import * as React from "react";
 import * as socketIO from "socket.io-client";
 import Scripts from "../components/Scripts";
@@ -53,7 +53,8 @@ export default class Index extends React.PureComponent<{}, IAppState> {
           <div className="ml-3 row">
             <h2
               className="col-12 text-center text-uppercase"
-              style={{ color: "cornsilk" }}>
+              style={{ color: "cornsilk" }}
+            >
               Mensagens :
             </h2>
           </div>
@@ -61,7 +62,8 @@ export default class Index extends React.PureComponent<{}, IAppState> {
           <div className="row">
             <div
               className="card col-12 col-lg-6 offset-lg-3 rounded"
-              style={AreaMensagem}>
+              style={AreaMensagem}
+            >
               <div className="card-body" id="txtAreaMensagem">
                 {""}
                 {listaMSGS}
@@ -81,7 +83,8 @@ export default class Index extends React.PureComponent<{}, IAppState> {
 
             <button
               onClick={this.enviarMSG}
-              className="btn btn-danger col-lg-1 col-4">
+              className="btn btn-danger col-lg-1 col-4"
+            >
               Enviar
             </button>
           </div>

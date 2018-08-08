@@ -2,51 +2,38 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch via nodemon",
-      "type": "node",
+      "type": "chrome",
       "request": "launch",
-      "program": "${workspaceRoot}/dist/server.js",
-      "protocol": "auto",
-      "stopOnEntry": false,
-      "cwd": "${workspaceRoot}/dist/server.js",
-      "preLaunchTask": null,
-      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/nodemon",
-      "env": {
-        "NODE_ENV": "development"
-      },
-      "console": "internalConsole",
+      "name": "debug chrome",
+      "url": "http://localhost:3000",
       "sourceMaps": true,
-      "outFiles": ["${workspaceRoot}/server/server.ts"]
+      "sourceMapPathOverrides": {
+        "webpack:///../../server/pages/*.tsx":
+          "${workspaceFolder}/server/pages/*.tsx",
+        "webpack:///src/*": "${webRoot}/*",
+        "webpack:///*": "*",
+        "webpack:///./~/*": "${webRoot}/node_modules/*",
+        "meteor://💻app/*": "${webRoot}/*"
+      },
+      "skipFiles": [
+        "<node_internals>/**/*.js",
+        "${workspaceRoot}/node_modules/**/*.js",
+        "${workspaceRoot}/node_modules",
+        "node_modules"
+      ]
     },
     {
       "type": "node",
       "request": "attach",
-      "name": "Attach to Nodemon",
-      "address": "localhost",
-      "port": 5858,
+      "name": "Debug node/next",
+      "port": 9229,
       "restart": true
-    },
-    {
-      "name": "Launch chrome with debugger",
-      "type": "chrome",
-      "request": "launch",
-      "url": "http://localhost:3000",
-      "webRoot": "${workspaceRoot}/dist/server.js",
-      "userDataDir": "${workspaceRoot}/.vscode/chrome"
     }
   ],
   "compounds": [
     {
-      "name": "Launch WebSite",
-      "configurations": ["Launch via nodemon", "Attach to Nodemon"]
-    },
-    {
-      "name": "Launch WebSite with chrome",
-      "configurations": [
-        "Launch via nodemon",
-        "Attach to Nodemon",
-        "Launch chrome with debugger"
-      ]
+      "name": "junto e misturado",
+      "configurations": ["Debug node/next", "Debug node/next"]
     }
   ]
 }
