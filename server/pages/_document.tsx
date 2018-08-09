@@ -35,7 +35,6 @@ export default class MyDocument extends Document {
             type="image/x-icon"
           />
           <link rel="icon" href="static/imgs/Icone.png" type="image/x-icon" />
-          <title>My page</title>
           {this.props.styleTags}
         </Head>
         <body>
