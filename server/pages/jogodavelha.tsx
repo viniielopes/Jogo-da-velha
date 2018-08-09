@@ -60,7 +60,7 @@ export default class JogoDaVelha extends React.Component<
 
   public componentDidMount() {
     this.io = socketIO.connect(
-      `${document.location.protocol}//${document.location.host}`
+      `${location.protocol}//${location.host}${location.pathname}`
     );
 
     this.io.on("fezJogada", (jogada: string[], vezdeJogar: boolean) => {

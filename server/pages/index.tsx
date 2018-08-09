@@ -78,7 +78,7 @@ export default class Index extends React.PureComponent<{}, IAppState> {
               name="mensagem"
               id="mensagem"
               ref={this.campoMensagem}
-              className="form-control col-8 col-lg-5 offset-3"
+              className="form-control col-8 col-lg-5 offset-lg-3"
             />
 
             <button
