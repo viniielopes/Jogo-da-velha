@@ -37,14 +37,21 @@ export default class JogoDaVelha extends React.Component<
           <title>Jogo da velha</title>
         </Head>
         <h1 style={{ textAlign: "center" }}>
-          Vez do jogador {this.state.vezJogador ? "X" : "O"}
+          {this.state.mensagem !== ""
+            ? // tslint:disable-next-line:jsx-no-multiline-js
+              this.state.mensagem
+            : `Vez do jogador ${this.state.vezJogador ? "X" : "O"}`}
         </h1>
 
         <Wrapper>
           <GridContainer>
             {botoes}
 
-            <BtnReiniciar hidden={true}>Reiniciar</BtnReiniciar>
+            <BtnReiniciar
+              hidden={this.state.mensagem !== "" ? false : true}
+              onClick={this.ReiniciarJogo}>
+              Reiniciar
+            </BtnReiniciar>
           </GridContainer>
         </Wrapper>
       </React.Fragment>
@@ -58,6 +65,7 @@ export default class JogoDaVelha extends React.Component<
 
     this.io.on("fezJogada", (jogada: string[], vezdeJogar: boolean) => {
       this.setState({ jogadas: jogada, vezJogador: vezdeJogar });
+      this.verificaVecendor(this.state.jogadas);
     });
   }
 
@@ -79,16 +87,36 @@ export default class JogoDaVelha extends React.Component<
   };
 
   private jogada = (i: number, event: React.MouseEvent<HTMLButtonElement>) => {
-    event.currentTarget.innerText = this.state.vezJogador ? "X" : "O";
-    const campoJogado = this.state.jogadas.slice();
-    campoJogado[i] = this.state.vezJogador ? "X" : "O";
+    if (this.state.mensagem === "") {
+      event.currentTarget.innerText = this.state.vezJogador ? "X" : "O";
+      const campoJogado = this.state.jogadas.slice();
+      campoJogado[i] = this.state.vezJogador ? "X" : "O";
 
-    verificaVitoria(campoJogado);
+      this.verificaVecendor(campoJogado);
 
-    this.setState({ jogadas: campoJogado, vezJogador: !this.state.vezJogador });
-    event.currentTarget.disabled = true;
+      this.setState({
+        jogadas: campoJogado,
+        vezJogador: !this.state.vezJogador,
+      });
+      event.currentTarget.disabled = true;
 
-    this.io.emit("fezJogada", campoJogado, !this.state.vezJogador);
+      this.io.emit("fezJogada", campoJogado, !this.state.vezJogador);
+    }
+  };
+
+  private verificaVecendor(camposJogados: string[]) {
+    const vencedor: string | null = verificaVitoria(camposJogados);
+    if (vencedor !== "") {
+      this.setState({ mensagem: `O vencedor é o jogador: ${vencedor}` });
+    }
+  }
+
+  private ReiniciarJogo = () => {
+    this.setState({
+      vezJogador: true,
+      mensagem: "",
+      jogadas: Array(9).fill(null),
+    });
   };
 }
 
