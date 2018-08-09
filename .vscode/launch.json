@@ -4,9 +4,8 @@
     {
       "type": "chrome",
       "request": "launch",
-      "name": "Next: Chrome",
-      "url": "http://localhost:3000",
-      "sourceMaps": true,
+      "name": "debug chrome",
+      "url": "http://localhost:3000/jogodavelha",
       "sourceMapPathOverrides": {
         "webpack:///../../server/pages/*.tsx":
           "${workspaceFolder}/server/pages/*.tsx",
@@ -21,12 +20,26 @@
         "${workspaceRoot}/node_modules",
         "node_modules"
       ]
+    },
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Debug node/next",
+      "port": 9229,
+      "restart": true,
+      "smartStep": true,
+      "skipFiles": [
+        "<node_internals>/**/*.js",
+        "${workspaceRoot}/node_modules/**/*.js",
+        "${workspaceRoot}/node_modules",
+        "node_modules"
+      ]
     }
   ],
   "compounds": [
     {
-      "name": "Next: Full",
-      "configurations": ["Next: Node", "Next: Chrome"]
+      "name": "junto e misturado",
+      "configurations": ["Debug node/next", "Debug node/next"]
     }
   ]
 }
